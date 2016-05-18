@@ -1,6 +1,18 @@
-(function(window, Math) {
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define([], factory);
+    } 
+    else if (typeof exports === 'object') {
+        // Node/CommonJS
+        factory(require());
+    } 
+    else {
+        // Browser globals
+        factory();
+    }
+}(function () {
     var document = window.document;
-    var Tek = window.Tek || {};
     var ads = {};
     var scriptLoaded = false;
 
@@ -300,7 +312,7 @@
         for (var i=0, length=containers.length; i<length; i++) {
             var el = containers[i];
             if (el.dataset.name && !hasClass(el,'ad-loaded')) {
-                Tek.ads.fetchAdElement(el);
+                this.fetchAdElement(el);
             }
         }
     };
@@ -366,6 +378,6 @@
         });
     };
 
-    Tek.ads = ads;
+    return ads;
 
-})(this, Math);
+}));
